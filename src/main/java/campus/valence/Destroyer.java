@@ -2,17 +2,19 @@ package campus.valence;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
 
 public class Destroyer {
 
-    private static int STEP = 5;
-
+    private static int STEP = 10;
     private final JPanel panel;
+    private SpaceCampus game;
 
-    Destroyer() {
+    Destroyer(SpaceCampus game) {
         panel = new JPanel();
         panel.setBounds(150, 500, 100, 30);
         panel.setBackground(Color.PINK);
+        this.game = game;
     }
 
     public void moveLeft() {
@@ -33,9 +35,12 @@ public class Destroyer {
     }
 
     public void destroyerFire() {
+        int x = this.panel.getX();
+        this.game.fire(new FireBall(x));
     }
 
     public JPanel getPanel() {
         return panel;
     }
+
 }
