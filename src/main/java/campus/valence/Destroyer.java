@@ -9,6 +9,7 @@ public class Destroyer {
     private static int STEP = 10;
     private final JPanel panel;
     private SpaceCampus game;
+    private boolean isDead;
 
     Destroyer(SpaceCampus game) {
         panel = new JPanel();
@@ -41,6 +42,14 @@ public class Destroyer {
 
     public JPanel getPanel() {
         return panel;
+    }
+
+    public boolean isDead() {
+        return isDead;
+    }
+
+    public void setDead(boolean dead) {
+        isDead = dead;
     }
 
 }

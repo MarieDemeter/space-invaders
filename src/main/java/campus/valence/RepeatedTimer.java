@@ -7,6 +7,6 @@ public class RepeatedTimer {
 
     public RepeatedTimer(FireBall fireBall) {
         Timer timer = new Timer();
-        timer.scheduleAtFixedRate(new FireBallMove(fireBall), 0, 500);
+        timer.scheduleAtFixedRate(new FireBallMove(fireBall), 0, 300);
     }
 }
