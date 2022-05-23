@@ -12,7 +12,6 @@ public class Block {
         this.panel = new JPanel();
 
         this.createBlock(i, nbOfBlock);
-        new TimerBlockMove(this);
     }
 
     private void createBlock(int i, int nbOfBlock) {

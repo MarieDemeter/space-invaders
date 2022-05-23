@@ -37,6 +37,9 @@ public class SpaceCampus {
         createDestroyer();
         createBlocks();
         launch();
+
+        new TimerFireBallMove(this.fireBalls);
+        new TimerCollision(this);
     }
 
     public void launch() {
@@ -56,21 +59,13 @@ public class SpaceCampus {
     }
 
     private void createBlocks() {
-//        int random = (int) (Math.random() * 6) + 1;
-//        for (int i = 0; i < random; i++) {
-//            Block block = new Block(i, random);
-//            this.blocks.add(block);
-//        }
-//        for (Block block : this.blocks) {
-//            this.panel.add(block.getPanel());
-//        }
         new TimerCreateBlock(this);
+        new TimerBlockMove(this.blocks);
     }
 
     public void fire(FireBall fireBall) {
         this.fireBalls.add(fireBall);
         this.panel.add(fireBall.getPanel());
-        new TimerCollision(this, fireBall);
     }
 
     public void collision() {
@@ -78,13 +73,14 @@ public class SpaceCampus {
             return;
         }
 
-
         Integer blockIndexToDelete = null;
         Integer fireBallIndexToDelete = null;
 
-        for (int i = 0; i < fireBalls.size(); i++) {
-            for (int j = 0; j < blocks.size(); j++) {
-                FireBall fireBall = this.fireBalls.get(i);
+        int i = 0;
+        while (i < fireBalls.size()) {
+            FireBall fireBall = this.fireBalls.get(i);
+            int j = 0;
+            while (j < blocks.size()) {
                 Block block = this.blocks.get(j);
 
                 if (block.intersects(fireBall)) {
@@ -92,18 +88,23 @@ public class SpaceCampus {
                     fireBall.getPanel().setVisible(false);
                     blockIndexToDelete = j;
                     fireBallIndexToDelete = i;
-                } else if (fireBall.getPanel().getBounds().getY() <= 35) {
+                } else if (fireBall.getPanel().getBounds().getY() <= 5) {
                     fireBall.getPanel().setVisible(false);
                     fireBallIndexToDelete = i;
                 }
+                j++;
             }
-        }
-        if (fireBallIndexToDelete != null ) {
-            this.fireBalls.remove((int) fireBallIndexToDelete);
+            i++;
         }
         if (blockIndexToDelete != null) {
-            this.blocks.remove((int) blockIndexToDelete);
+                this.blocks.remove((int) blockIndexToDelete);
+
         }
+
+        if (fireBallIndexToDelete != null) {
+                this.fireBalls.remove((int) fireBallIndexToDelete);
+            }
+
     }
 
 

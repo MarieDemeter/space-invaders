@@ -1,25 +1,28 @@
 package campus.valence;
 
+import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
 public class TimerFireBallMove {
 
-    public TimerFireBallMove(FireBall fireBall) {
+    public TimerFireBallMove(ArrayList<FireBall> fireBalls) {
         Timer timer = new Timer();
-        timer.scheduleAtFixedRate(new FireBallMove(fireBall), 0, 150);
+        timer.scheduleAtFixedRate(new FireBallMove(fireBalls), 0, 100);
     }
 
     public class FireBallMove extends TimerTask {
-        FireBall fireBall;
+        ArrayList<FireBall> fireBalls;
 
-        public FireBallMove(FireBall fireBall) {
-            this.fireBall = fireBall;
+        public FireBallMove(ArrayList<FireBall> fireBalls) {
+            this.fireBalls = fireBalls;
         }
 
         @Override
         public void run() {
-            this.fireBall.moveY();
+            for (FireBall fireBall : this.fireBalls) {
+                fireBall.moveY();
+            }
         }
     }
 
