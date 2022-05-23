@@ -35,7 +35,6 @@ public class Block {
                 this.panel.setBackground(Color.BLUE);
                 break;
         }
-
         this.panel.setBounds((gap / 2) * (i + 1) + width * i, 5, width, 30);
     }
 
@@ -46,12 +45,11 @@ public class Block {
         }
     }
 
-
     public JPanel getPanel() {
         return panel;
     }
 
-    public boolean intersects(FireBall fireBall) {
+    public boolean intersects(Attack fireBall) {
         return getPanel().getBounds().intersects(fireBall.getPanel().getBounds());
     }
 }

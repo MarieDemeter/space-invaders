@@ -6,21 +6,21 @@ import java.util.TimerTask;
 
 public class TimerFireBallMove {
 
-    public TimerFireBallMove(ArrayList<FireBall> fireBalls) {
+    public TimerFireBallMove(ArrayList<Attack> fireBalls) {
         Timer timer = new Timer();
         timer.scheduleAtFixedRate(new FireBallMove(fireBalls), 0, 100);
     }
 
     public class FireBallMove extends TimerTask {
-        ArrayList<FireBall> fireBalls;
+        ArrayList<Attack> fireBalls;
 
-        public FireBallMove(ArrayList<FireBall> fireBalls) {
+        public FireBallMove(ArrayList<Attack> fireBalls) {
             this.fireBalls = fireBalls;
         }
 
         @Override
         public void run() {
-            for (FireBall fireBall : this.fireBalls) {
+            for (Attack fireBall : this.fireBalls) {
                 fireBall.moveY();
             }
         }

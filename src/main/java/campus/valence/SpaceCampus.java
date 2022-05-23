@@ -9,15 +9,11 @@ public class SpaceCampus {
     private JFrame frame;
     private JPanel panel;
     private Destroyer destroyer;
-    private ArrayList<campus.valence.FireBall> fireBalls;
+    private ArrayList<campus.valence.Attack> fireBalls;
     private ArrayList<campus.valence.Block> blocks;
 
     public Destroyer getDestroyer() {
         return destroyer;
-    }
-
-    public void setPanel(JPanel panel) {
-        this.panel = panel;
     }
 
     public ArrayList<Block> getBlocks() {
@@ -83,7 +79,7 @@ public class SpaceCampus {
 
         int i = 0;
         while (i < fireBalls.size()) {
-            FireBall fireBall = this.fireBalls.get(i);
+            Attack fireBall = this.fireBalls.get(i);
             int j = 0;
             while (j < blocks.size()) {
                 Block block = this.blocks.get(j);
@@ -121,9 +117,9 @@ public class SpaceCampus {
                 }
             }
         }else{
-            System.exit(0);
-//            this.panel.removeAll();
-//            this.panel.setBackground(Color.black);
+//            System.exit(0);
+            this.panel.removeAll();
+            this.panel.setBackground(Color.black);
 //            JLabel gameOver = new JLabel();
 //            gameOver.setText("GAME OVER");
 //            gameOver.setHorizontalTextPosition(JLabel.CENTER);
