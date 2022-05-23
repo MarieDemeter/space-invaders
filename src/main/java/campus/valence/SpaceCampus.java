@@ -12,6 +12,14 @@ public class SpaceCampus {
     private ArrayList<campus.valence.FireBall> fireBalls;
     private ArrayList<campus.valence.Block> blocks;
 
+    public ArrayList<Block> getBlocks() {
+        return blocks;
+    }
+
+    public JPanel getPanel() {
+        return panel;
+    }
+
     SpaceCampus() {
         this.fireBalls = new ArrayList<>();
         this.blocks = new ArrayList<>();
@@ -41,10 +49,6 @@ public class SpaceCampus {
         this.frame.setVisible(true);
     }
 
-    public void intersect(Shape other) {
-//        return .getBounds2D().intersects(other.getBounds2D());
-    }
-
     private void createDestroyer() {
         destroyer = new Destroyer(this);
         this.panel.add(destroyer.getPanel());
@@ -52,30 +56,54 @@ public class SpaceCampus {
     }
 
     private void createBlocks() {
-        int random = (int) (Math.random() * 6) + 1;
-        for (int i = 0; i < random; i++) {
-            Block block = new Block(i,random);
-            this.blocks.add(block);
-        }
-        for (Block block : this.blocks) {
-            this.panel.add(block.getPanel());
-            //this.panel.repaint();
-        }
-
-//        JPanel panel1 = new JPanel();
-//        panel1.setBounds(5, 5, 80, 30);
-//        panel1.setBackground(Color.BLUE);
-//        this.panel.add(panel1);
-//
-//        JPanel panel2 = new JPanel();
-//        panel2.setBounds(100, 5, 80, 30);
-//        panel2.setBackground(Color.BLUE);
-//        this.panel.add(panel2);
+//        int random = (int) (Math.random() * 6) + 1;
+//        for (int i = 0; i < random; i++) {
+//            Block block = new Block(i, random);
+//            this.blocks.add(block);
+//        }
+//        for (Block block : this.blocks) {
+//            this.panel.add(block.getPanel());
+//        }
+        new TimerCreateBlock(this);
     }
 
     public void fire(FireBall fireBall) {
         this.fireBalls.add(fireBall);
         this.panel.add(fireBall.getPanel());
+        new TimerCollision(this, fireBall);
+    }
+
+    public void collision() {
+        if (fireBalls.size() == 0) {
+            return;
+        }
+
+
+        Integer blockIndexToDelete = null;
+        Integer fireBallIndexToDelete = null;
+
+        for (int i = 0; i < fireBalls.size(); i++) {
+            for (int j = 0; j < blocks.size(); j++) {
+                FireBall fireBall = this.fireBalls.get(i);
+                Block block = this.blocks.get(j);
+
+                if (block.intersects(fireBall)) {
+                    block.getPanel().setVisible(false);
+                    fireBall.getPanel().setVisible(false);
+                    blockIndexToDelete = j;
+                    fireBallIndexToDelete = i;
+                } else if (fireBall.getPanel().getBounds().getY() <= 35) {
+                    fireBall.getPanel().setVisible(false);
+                    fireBallIndexToDelete = i;
+                }
+            }
+        }
+        if (fireBallIndexToDelete != null ) {
+            this.fireBalls.remove((int) fireBallIndexToDelete);
+        }
+        if (blockIndexToDelete != null) {
+            this.blocks.remove((int) blockIndexToDelete);
+        }
     }
 
 

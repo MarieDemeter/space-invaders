@@ -10,7 +10,7 @@ public class FireBall {
     public FireBall(int x) {
         this.STEP = 15;
         this.createFireBall(x);
-        new RepeatedTimer(this);
+        new TimerFireBallMove(this);
     }
 
     private void createFireBall(int x) {
@@ -23,9 +23,6 @@ public class FireBall {
         Rectangle bounds = panel.getBounds();
         if (this.panel.getY() > 35) {
             panel.setBounds(bounds.x, bounds.y - this.STEP, bounds.width, bounds.height);
-        } else {
-            //this.panel.setBackground(Color.green);
-            this.panel.setVisible(false);
         }
     }
 
