@@ -8,7 +8,7 @@ public class TimerCreateBlock {
 
     public TimerCreateBlock(SpaceCampus game) {
         Timer timer = new Timer();
-        timer.scheduleAtFixedRate(new CreateBlock(game), 0, 4000);
+        timer.scheduleAtFixedRate(new CreateBlock(game), 0, 3000);
     }
 
     public static class CreateBlock extends TimerTask {
@@ -23,7 +23,7 @@ public class TimerCreateBlock {
         @Override
         public void run() {
 
-            int random = (int) (Math.random() * 6) + 1;
+            int random = (int) (Math.random() * 4) + 1;
             for (int i = 0; i < random; i++) {
                 Block block = new Block(i, random);
                 this.game.getBlocks().add(block);

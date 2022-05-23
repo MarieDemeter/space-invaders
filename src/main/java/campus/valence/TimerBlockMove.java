@@ -9,7 +9,7 @@ public class TimerBlockMove {
 
     public TimerBlockMove(ArrayList<Block> blocks) {
         Timer timer = new Timer();
-        timer.scheduleAtFixedRate(new TimerBlockMove.BlockMove(blocks), 0, 3000);
+        timer.scheduleAtFixedRate(new TimerBlockMove.BlockMove(blocks), 0, 2000);
     }
 
     public class BlockMove extends TimerTask {
@@ -21,6 +21,9 @@ public class TimerBlockMove {
 
         @Override
         public void run() {
+            if(blocks.size()==0){
+                return;
+            }
             for (Block block : this.blocks) {
                 block.moveY();
             }

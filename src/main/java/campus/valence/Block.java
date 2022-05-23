@@ -15,18 +15,33 @@ public class Block {
     }
 
     private void createBlock(int i, int nbOfBlock) {
-        int width = 50;
+        int width = 70;
         int widthFrame = 400;
         int widthGap = widthFrame - width * nbOfBlock;
         int gap = (int) widthGap / nbOfBlock;
 
-        this.panel.setBackground(Color.BLUE);
-        this.panel.setBounds((gap/2)*(i +1)+width* i, 5, width, 30);
+        int randomColor = (int) (Math.random()*9) +1;
+        switch (randomColor) {
+            case 1:
+                this.panel.setBackground(Color.YELLOW);
+                break;
+            case 2:
+                this.panel.setBackground(Color.GREEN);
+                break;
+            case 3:
+                this.panel.setBackground(Color.ORANGE);
+                break;
+            default:
+                this.panel.setBackground(Color.BLUE);
+                break;
+        }
+
+        this.panel.setBounds((gap / 2) * (i + 1) + width * i, 5, width, 30);
     }
 
     public void moveY() {
         Rectangle bounds = panel.getBounds();
-        if (this.panel.getY() <485) {
+        if (this.panel.getY() < 485) {
             panel.setBounds(bounds.x, bounds.y + this.STEP, bounds.width, bounds.height);
         }
     }

@@ -12,8 +12,18 @@ public class Destroyer {
     private boolean isDead;
 
     Destroyer(SpaceCampus game) {
+        this.isDead = false;
         panel = new JPanel();
         panel.setBounds(150, 500, 100, 30);
+
+//        ImageIcon vessel = new ImageIcon("space.png");
+//        JLabel label = new JLabel();
+//        label.setBounds(0,0,100,30);
+//        label.setOpaque(true);
+//        label.setIcon(vessel);
+
+//        panel.add(label);
+
         panel.setBackground(Color.PINK);
         this.game = game;
     }

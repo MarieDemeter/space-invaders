@@ -12,6 +12,14 @@ public class SpaceCampus {
     private ArrayList<campus.valence.FireBall> fireBalls;
     private ArrayList<campus.valence.Block> blocks;
 
+    public Destroyer getDestroyer() {
+        return destroyer;
+    }
+
+    public void setPanel(JPanel panel) {
+        this.panel = panel;
+    }
+
     public ArrayList<Block> getBlocks() {
         return blocks;
     }
@@ -38,17 +46,14 @@ public class SpaceCampus {
         createBlocks();
         launch();
 
+        new TimerIsDead(this);
         new TimerFireBallMove(this.fireBalls);
         new TimerCollision(this);
+
+
     }
 
     public void launch() {
-//        if(this.destroyer.isDead()) {
-//          this.panel = new JPanel();
-//          JPanel gameOver = new JPanel();
-//          gameOver.setBackground(Color.black);
-//          this.panel.add(gameOver);
-//        }
         this.frame.setVisible(true);
     }
 
@@ -82,7 +87,6 @@ public class SpaceCampus {
             int j = 0;
             while (j < blocks.size()) {
                 Block block = this.blocks.get(j);
-
                 if (block.intersects(fireBall)) {
                     block.getPanel().setVisible(false);
                     fireBall.getPanel().setVisible(false);
@@ -97,15 +101,35 @@ public class SpaceCampus {
             i++;
         }
         if (blockIndexToDelete != null) {
-                this.blocks.remove((int) blockIndexToDelete);
+            this.blocks.remove((int) blockIndexToDelete);
 
         }
 
         if (fireBallIndexToDelete != null) {
-                this.fireBalls.remove((int) fireBallIndexToDelete);
-            }
+            this.fireBalls.remove((int) fireBallIndexToDelete);
+        }
 
     }
 
+    public void isDead() {
+        if (blocks.size()==0){return;}
+        if (!this.getDestroyer().isDead()) {
 
+            for (Block block : this.blocks) {
+                if (block.getPanel().getBounds().getY()>=490){
+                    this.destroyer.setDead(true);
+                }
+            }
+        }else{
+            System.exit(0);
+//            this.panel.removeAll();
+//            this.panel.setBackground(Color.black);
+//            JLabel gameOver = new JLabel();
+//            gameOver.setText("GAME OVER");
+//            gameOver.setHorizontalTextPosition(JLabel.CENTER);
+//            gameOver.setFont(new Font ("MV Boli", Font.PLAIN, 50));
+//            gameOver.setOpaque(true);
+//            this.panel.add(gameOver);
+        }
+    }
 }
