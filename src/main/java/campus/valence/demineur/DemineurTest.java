@@ -86,9 +86,9 @@ public class DemineurTest {
     public void shouldDisplayTheBoardWithBombsAndCount() {
         // Given
         Demineur demineur = new Demineur(new Case[][]{
-                new Case[]{new Case.ClearCase(0, 0), new Case.ClearCase(1, 0), new Case.ClearCase(2, 0),},
-                new Case[]{new Case.BombCase(0, 1), new Case.ClearCase(1, 1), new Case.ClearCase(2, 1),},
-                new Case[]{new Case.ClearCase(0, 2), new Case.ClearCase(1, 2), new Case.BombCase(2, 2),}
+                new Case[]{new Case.ClearCase(0, 0), new Case.ClearCase(0, 1), new Case.ClearCase(0, 2),},
+                new Case[]{new Case.BombCase(1, 0), new Case.ClearCase(1, 1), new Case.ClearCase(1, 2),},
+                new Case[]{new Case.ClearCase(2, 0), new Case.ClearCase(2, 1), new Case.BombCase(2, 2),}
         });
 
         // When

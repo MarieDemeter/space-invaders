@@ -56,7 +56,7 @@ public class Demineur {
         for (int i = x - 1; i <= x + 1; i++) {
             for (int j = y - 1; j <= y + 1; j++) {
                 if (i >= 0 && j >= 0 && i<this.board.length && j<this.board.length) {
-                    if (this.board[j][i] instanceof Case.BombCase) {
+                    if (this.board[i][j] instanceof Case.BombCase) {
                         nbOfBombs++;
                     }
                 }
