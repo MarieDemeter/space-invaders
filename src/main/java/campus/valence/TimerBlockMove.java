@@ -8,21 +8,31 @@ import java.util.concurrent.CopyOnWriteArrayList;
 public class TimerBlockMove {
 
 
-    public TimerBlockMove(CopyOnWriteArrayList<Block> blocks) {
+    public TimerBlockMove(SpaceCampus game) {
         Timer timer = new Timer();
-        timer.scheduleAtFixedRate(new TimerBlockMove.BlockMove(blocks), 0, 1500);
+        int speed = 3500;
+        if (game.getPoint() > 500) {
+            speed = 3000;
+        } else if (game.getPoint() > 1000) {
+            speed = 2500;
+        } else if (game.getPoint() > 1500){
+            speed = 2000;
+        } else if (game.getPoint() > 2000){
+            speed = 1500;
+        }
+        timer.scheduleAtFixedRate(new TimerBlockMove.BlockMove(game), 0, speed);
     }
 
     public class BlockMove extends TimerTask {
         CopyOnWriteArrayList<Block> blocks;
 
-        public BlockMove(CopyOnWriteArrayList<Block> blocks) {
-            this.blocks = blocks;
+        public BlockMove(SpaceCampus game) {
+            this.blocks = game.getBlocks();
         }
 
         @Override
         public void run() {
-            if(blocks.size()==0){
+            if (blocks.size() == 0) {
                 return;
             }
             for (Block block : this.blocks) {

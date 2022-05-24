@@ -65,9 +65,13 @@ public class SpaceCampus {
         this.panel.addKeyListener(new GameKeyListener(destroyer));
     }
 
+    public int getPoint() {
+        return point;
+    }
+
     private void createBlocks() {
         new TimerCreateBlock(this);
-        new TimerBlockMove(this.blocks);
+        new TimerBlockMove(this);
     }
 
     public void fire(FireBall fireBall) {
