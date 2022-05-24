@@ -96,9 +96,7 @@ public class DemineurTest {
 
         // Then
         assertEquals(boardAsString,
-        "|110|\n" +
-            "|X21|\n" +
-            "|12X|"
+        "|110|\n|X21|\n|12X|\n"
         );
     }
 
