@@ -8,7 +8,7 @@ public class TimerCreateBlock {
 
     public TimerCreateBlock(SpaceCampus game) {
         Timer timer = new Timer();
-        timer.scheduleAtFixedRate(new CreateBlock(game), 0, 3000);
+        timer.scheduleAtFixedRate(new CreateBlock(game), 0, 1700);
     }
 
     public static class CreateBlock extends TimerTask {

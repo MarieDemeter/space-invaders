@@ -3,14 +3,15 @@ package campus.valence;
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 public class SpaceCampus {
 
     private JFrame frame;
     private JPanel panel;
     private Destroyer destroyer;
-    private ArrayList<campus.valence.Attack> fireBalls;
-    private ArrayList<campus.valence.Block> blocks;
+    private CopyOnWriteArrayList<Attack> fireBalls;
+    private CopyOnWriteArrayList<campus.valence.Block> blocks;
     private JLabel score;
     private int point;
 
@@ -18,7 +19,7 @@ public class SpaceCampus {
         return destroyer;
     }
 
-    public ArrayList<Block> getBlocks() {
+    public CopyOnWriteArrayList<Block> getBlocks() {
         return blocks;
     }
 
@@ -28,9 +29,9 @@ public class SpaceCampus {
 
     SpaceCampus() {
         this.score = new JLabel();
-        this.point=0;
-        this.fireBalls = new ArrayList<>();
-        this.blocks = new ArrayList<>();
+        this.point = 0;
+        this.fireBalls = new CopyOnWriteArrayList<>();
+        this.blocks = new CopyOnWriteArrayList<>();
         panel = new JPanel();
         panel.setFocusable(true);
         panel.setLayout(null);
@@ -82,7 +83,6 @@ public class SpaceCampus {
         Integer blockIndexToDelete = null;
         Integer fireBallIndexToDelete = null;
 
-
         int i = 0;
         while (i < fireBalls.size()) {
             Attack fireBall = this.fireBalls.get(i);
@@ -90,12 +90,19 @@ public class SpaceCampus {
             while (j < blocks.size()) {
                 Block block = this.blocks.get(j);
                 if (block.intersects(fireBall)) {
-                    block.getPanel().setVisible(false);
-                    fireBall.getPanel().setVisible(false);
-                    blockIndexToDelete = j;
-                    fireBallIndexToDelete = i;
-                    this.point += 10;
-                    this.updateScore();
+                    if (block.getNbToKill() > 1) {
+                        block.setNbToKill(block.getNbToKill() - 1);
+                        block.getLabel().setText(Integer.toString(block.getNbToKill()));
+                        fireBall.getPanel().setVisible(false);
+                        fireBallIndexToDelete = i;
+                    } else {
+                        block.getPanel().setVisible(false);
+                        fireBall.getPanel().setVisible(false);
+                        blockIndexToDelete = j;
+                        fireBallIndexToDelete = i;
+                        this.point += 10;
+                        this.updateScore();
+                    }
                 } else if (fireBall.getPanel().getBounds().getY() <= 35) {
                     fireBall.getPanel().setVisible(false);
                     fireBallIndexToDelete = i;
@@ -116,18 +123,20 @@ public class SpaceCampus {
     }
 
     public void isDead() {
-        if (blocks.size()==0){return;}
+        if (blocks.size() == 0) {
+            return;
+        }
         if (!this.getDestroyer().isDead()) {
 
             for (Block block : this.blocks) {
-                if (block.getPanel().getBounds().getY()>=490){
+                if (block.getPanel().getBounds().getY() >= 490) {
                     this.destroyer.setDead(true);
                 }
             }
-        }else{
-//            System.exit(0);
-            this.panel.removeAll();
-            this.panel.setBackground(Color.black);
+        } else {
+            System.exit(0);
+//            this.panel.removeAll();
+//            this.panel.setBackground(Color.black);
 //            JLabel gameOver = new JLabel();
 //            gameOver.setText("GAME OVER");
 //            gameOver.setHorizontalTextPosition(JLabel.CENTER);
@@ -137,8 +146,8 @@ public class SpaceCampus {
         }
     }
 
-    public void printScore(){
-        this.score.setBounds(0,0,400,25);
+    public void printScore() {
+        this.score.setBounds(0, 0, 400, 25);
         this.score.setText("SCORE : " + this.point);
         this.frame.add(score);
         new TimerUpdateScore(this);

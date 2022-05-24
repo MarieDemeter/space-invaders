@@ -7,7 +7,7 @@ public class TimerCollision {
 
     public TimerCollision(SpaceCampus game) {
         Timer timer = new Timer();
-        timer.scheduleAtFixedRate(new Collision(game), 0, 100);
+        timer.scheduleAtFixedRate(new Collision(game), 0, 150);
     }
 
     public static class Collision extends TimerTask {

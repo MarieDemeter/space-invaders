@@ -3,19 +3,20 @@ package campus.valence;
 import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 public class TimerBlockMove {
 
 
-    public TimerBlockMove(ArrayList<Block> blocks) {
+    public TimerBlockMove(CopyOnWriteArrayList<Block> blocks) {
         Timer timer = new Timer();
-        timer.scheduleAtFixedRate(new TimerBlockMove.BlockMove(blocks), 0, 2000);
+        timer.scheduleAtFixedRate(new TimerBlockMove.BlockMove(blocks), 0, 1500);
     }
 
     public class BlockMove extends TimerTask {
-        ArrayList<Block> blocks;
+        CopyOnWriteArrayList<Block> blocks;
 
-        public BlockMove(ArrayList<Block> blocks) {
+        public BlockMove(CopyOnWriteArrayList<Block> blocks) {
             this.blocks = blocks;
         }
 

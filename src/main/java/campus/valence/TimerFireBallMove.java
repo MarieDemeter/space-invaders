@@ -3,18 +3,19 @@ package campus.valence;
 import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 public class TimerFireBallMove {
 
-    public TimerFireBallMove(ArrayList<Attack> fireBalls) {
+    public TimerFireBallMove(CopyOnWriteArrayList<Attack> fireBalls) {
         Timer timer = new Timer();
         timer.scheduleAtFixedRate(new FireBallMove(fireBalls), 0, 100);
     }
 
     public class FireBallMove extends TimerTask {
-        ArrayList<Attack> fireBalls;
+        CopyOnWriteArrayList<Attack> fireBalls;
 
-        public FireBallMove(ArrayList<Attack> fireBalls) {
+        public FireBallMove(CopyOnWriteArrayList<Attack> fireBalls) {
             this.fireBalls = fireBalls;
         }
 

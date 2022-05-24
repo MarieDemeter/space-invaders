@@ -11,7 +11,7 @@ public class FireBall extends Attack {
     }
 
     private void createFireBall(int x) {
-        this.getPanel().setBounds((x + 50), 485, 10, 10);
+        this.getPanel().setBounds((x + 50), 485, 5, 10);
         this.getPanel().setBackground(Color.red);
     }
 
