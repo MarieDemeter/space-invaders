@@ -11,6 +11,8 @@ public class SpaceCampus {
     private Destroyer destroyer;
     private ArrayList<campus.valence.Attack> fireBalls;
     private ArrayList<campus.valence.Block> blocks;
+    private JLabel score;
+    private int point;
 
     public Destroyer getDestroyer() {
         return destroyer;
@@ -25,6 +27,8 @@ public class SpaceCampus {
     }
 
     SpaceCampus() {
+        this.score = new JLabel();
+        this.point=0;
         this.fireBalls = new ArrayList<>();
         this.blocks = new ArrayList<>();
         panel = new JPanel();
@@ -40,6 +44,7 @@ public class SpaceCampus {
 
         createDestroyer();
         createBlocks();
+        printScore();
         launch();
 
         new TimerIsDead(this);
@@ -77,6 +82,7 @@ public class SpaceCampus {
         Integer blockIndexToDelete = null;
         Integer fireBallIndexToDelete = null;
 
+
         int i = 0;
         while (i < fireBalls.size()) {
             Attack fireBall = this.fireBalls.get(i);
@@ -88,7 +94,9 @@ public class SpaceCampus {
                     fireBall.getPanel().setVisible(false);
                     blockIndexToDelete = j;
                     fireBallIndexToDelete = i;
-                } else if (fireBall.getPanel().getBounds().getY() <= 5) {
+                    this.point += 10;
+                    this.updateScore();
+                } else if (fireBall.getPanel().getBounds().getY() <= 35) {
                     fireBall.getPanel().setVisible(false);
                     fireBallIndexToDelete = i;
                 }
@@ -127,5 +135,18 @@ public class SpaceCampus {
 //            gameOver.setOpaque(true);
 //            this.panel.add(gameOver);
         }
+    }
+
+    public void printScore(){
+        this.score.setBounds(0,0,400,25);
+        this.score.setText("SCORE : " + this.point);
+        this.frame.add(score);
+        new TimerUpdateScore(this);
+    }
+
+    public void updateScore() {
+        this.score.removeAll();
+        this.score.setText("SCORE : " + this.point);
+
     }
 }

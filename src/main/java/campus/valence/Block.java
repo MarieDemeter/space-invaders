@@ -35,7 +35,7 @@ public class Block {
                 this.panel.setBackground(Color.BLUE);
                 break;
         }
-        this.panel.setBounds((gap / 2) * (i + 1) + width * i, 5, width, 30);
+        this.panel.setBounds((gap / 2) * (i + 1) + width * i, 35, width, 30);
     }
 
     public void moveY() {
