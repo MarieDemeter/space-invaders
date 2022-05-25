@@ -6,12 +6,12 @@ import java.awt.*;
 public class FireBall extends Attack {
 
     public FireBall(int x) {
-        super(15);
+        super(20);
         this.createFireBall(x);
     }
 
     private void createFireBall(int x) {
-        this.getPanel().setBounds((x + 50), 485, 5, 10);
+        this.getPanel().setBounds((x + 20), 480, 5, 10);
         this.getPanel().setBackground(Color.red);
     }
 

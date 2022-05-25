@@ -8,16 +8,16 @@ public class TimerCreateBlock {
 
     public TimerCreateBlock(SpaceCampus game) {
         Timer timer = new Timer();
-        int speed = 3700;
-        if (game.getPoint() > 500) {
-            speed = 3200;
-        } else if (game.getPoint() > 1000) {
-            speed = 2700;
-        } else if (game.getPoint() > 1500){
-            speed = 2200;
-        } else if (game.getPoint() > 2000){
-            speed = 1700;
-        }
+        int speed = 1950;
+//        if (game.getPoint() > 500) {
+//            speed = 3200;
+//        } else if (game.getPoint() > 1000) {
+//            speed = 2700;
+//        } else if (game.getPoint() > 1500){
+//            speed = 2200;
+//        } else if (game.getPoint() > 2000){
+//            speed = 1700;
+//        }
         timer.scheduleAtFixedRate(new CreateBlock(game), 0, speed);
     }
 

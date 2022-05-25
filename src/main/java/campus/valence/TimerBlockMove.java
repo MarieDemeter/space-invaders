@@ -10,16 +10,16 @@ public class TimerBlockMove {
 
     public TimerBlockMove(SpaceCampus game) {
         Timer timer = new Timer();
-        int speed = 3500;
-        if (game.getPoint() > 500) {
-            speed = 3000;
-        } else if (game.getPoint() > 1000) {
-            speed = 2500;
-        } else if (game.getPoint() > 1500){
-            speed = 2000;
-        } else if (game.getPoint() > 2000){
-            speed = 1500;
-        }
+        int speed = 1900;
+//        if (game.getPoint() > 500) {
+//            speed = 3000;
+//        } else if (game.getPoint() > 1000) {
+//            speed = 2500;
+//        } else if (game.getPoint() > 1500){
+//            speed = 2000;
+//        } else if (game.getPoint() > 2000){
+//            speed = 1500;
+//        }
         timer.scheduleAtFixedRate(new TimerBlockMove.BlockMove(game), 0, speed);
     }
 

@@ -10,7 +10,7 @@ public class Block {
     private int nbToKill;
 
     public Block(int i, int nbOfBlock) {
-        this.STEP = 35;
+        this.STEP = 40;
         this.panel = new JPanel();
         this.label = new JLabel();
 
@@ -25,43 +25,43 @@ public class Block {
         this.nbToKill = nbToKill;
     }
 
-    public void setLabel(JLabel label) {
-        this.label = label;
-    }
-
     public JLabel getLabel() {
         return label;
     }
 
     private void createBlock(int i, int nbOfBlock) {
-        int width = 70;
+        int width = 50;
         int widthFrame = 400;
         int widthGap = widthFrame - width * nbOfBlock;
         int gap = (int) widthGap / nbOfBlock;
 
+        ImageIcon invaderBlue = new ImageIcon("image/invaderBlue.png");
+        ImageIcon invaderPurple = new ImageIcon("image/invaderPurple.png");
+        ImageIcon invaderRed = new ImageIcon("image/invaderRed.png");
+        ImageIcon invaderBrown = new ImageIcon("image/invaderBrown.png");
+        JLabel labelInvader = new JLabel();
+
         int randomColor = (int) (Math.random()*9) +1;
         switch (randomColor) {
             case 1:
-                this.panel.setBackground(Color.YELLOW);
+                labelInvader.setIcon(invaderPurple);
                 this.nbToKill = 3;
                 break;
             case 2:
-                this.panel.setBackground(Color.GREEN);
+                labelInvader.setIcon(invaderRed);
                 this.nbToKill = 5;
                 break;
             case 3:
-                this.panel.setBackground(Color.ORANGE);
+                labelInvader.setIcon(invaderBrown);
                 this.nbToKill = 7;
                 break;
             default:
-                this.panel.setBackground(Color.BLUE);
+                labelInvader.setIcon(invaderBlue);
                 this.nbToKill = 1;
                 break;
         }
-        this.label.setText(Integer.toString(nbToKill));
-        this.panel.add(label);
-        this.panel.setBounds((gap / 2) * (i + 1) + width * i, 35, width, 30);
-
+        this.panel.add(labelInvader);
+        this.panel.setBounds((gap / 2) * (i + 1) + width * i, 35, width, 37);
     }
 
     public void moveY() {
