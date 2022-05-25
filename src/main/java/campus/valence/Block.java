@@ -7,16 +7,17 @@ public class Block {
     private JPanel panel;
     private int STEP;
     private int nbToKill;
-    String url;
+    private String url;
+    private int extra;
 
     public Block(int i, int nbOfBlock) {
-//        this.invaderBlue = new ImageIcon("image/invaderBlue.png");
-//        this.invaderPurple = new ImageIcon("image/invaderPurple.png");
-//        this.invaderRed = new ImageIcon("image/invaderRed.png");
-//        this.invaderBrown = new ImageIcon("image/invaderBrown.png");
         this.STEP = 40;
         this.url = "";
         this.createBlock(i, nbOfBlock);
+    }
+
+    public int getExtra() {
+        return extra;
     }
 
     public int getNbToKill() {
@@ -32,32 +33,29 @@ public class Block {
         int width = 50;
         int widthFrame = 400;
         int widthGap = widthFrame - width * nbOfBlock;
-        int gap = (int) widthGap / nbOfBlock;
-
-//        JLabel labelInvader = new JLabel();
-//        labelInvader.setBounds(0,0,150,150);
+        int gap = widthGap / nbOfBlock;
 
         int randomColor = (int) (Math.random()*9) +1;
         switch (randomColor) {
             case 1:
-//                labelInvader.setIcon(this.invaderPurple);
-                this.url = "image/invaderPurple.png";
+                this.url = "src/main/java/image/invaderPurple.png";
                 this.nbToKill = 3;
+                this.extra = 2;
                 break;
             case 2:
-//                labelInvader.setIcon(this.invaderRed);
-                this.url = "image/invaderRed.png";
+                this.url = "src/main/java/image/invaderRed.png";
                 this.nbToKill = 5;
+                this.extra = 3;
                 break;
             case 3:
-                this.url = "image/invaderBrown.png";
-//                labelInvader.setIcon(this.invaderBrown);
+                this.url = "src/main/java/image/invaderBrown.png";
                 this.nbToKill = 7;
+                this.extra = 4;
                 break;
             default:
-//                labelInvader.setIcon(this.invaderBlue);
-                this.url = "image/invaderBlue.png";
+                this.url = "src/main/java/image/invaderBlue.png";
                 this.nbToKill = 1;
+                this.extra = 1;
                 break;
         }
 

@@ -14,6 +14,7 @@ public class SpaceCampus {
     private CopyOnWriteArrayList<campus.valence.Block> blocks;
     private JLabel score;
     private int point;
+    private int extra;
 
     public Destroyer getDestroyer() {
         return destroyer;
@@ -32,6 +33,7 @@ public class SpaceCampus {
         this.point = 0;
         this.fireBalls = new CopyOnWriteArrayList<>();
         this.blocks = new CopyOnWriteArrayList<>();
+        this.extra = 1;
         panel = new JPanel();
         panel.setFocusable(true);
         panel.setLayout(null);
@@ -51,12 +53,14 @@ public class SpaceCampus {
         new TimerIsDead(this);
         new TimerFireBallMove(this.fireBalls);
         new TimerCollision(this);
-
-
     }
 
     public void launch() {
         this.frame.setVisible(true);
+    }
+
+    public int getExtra() {
+        return extra;
     }
 
     private void createDestroyer() {
@@ -65,19 +69,14 @@ public class SpaceCampus {
         this.panel.addKeyListener(new GameKeyListener(destroyer));
     }
 
-    public int getPoint() {
-        return point;
-    }
-
     private void createBlocks() {
         new TimerCreateBlock(this);
-//        this.frame.repaint();
         new TimerBlockMove(this);
     }
 
     public void fire(FireBall fireBall) {
-        this.fireBalls.add(fireBall);
-        this.panel.add(fireBall.getPanel());
+            this.fireBalls.add(fireBall);
+            this.panel.add(fireBall.getPanel());
     }
 
     public void collision() {
@@ -104,6 +103,7 @@ public class SpaceCampus {
                         fireBallIndexToDelete = i;
                         this.point += 10;
                         this.updateScore();
+                        this.extra = block.getExtra();
                     }
                     fireBall.getPanel().setVisible(false);
                 } else if (fireBall.getPanel().getBounds().getY() <= 35) {
@@ -116,13 +116,10 @@ public class SpaceCampus {
         }
         if (blockIndexToDelete != null) {
             this.blocks.remove((int) blockIndexToDelete);
-
         }
-
         if (fireBallIndexToDelete != null) {
             this.fireBalls.remove((int) fireBallIndexToDelete);
         }
-
     }
 
     public void isDead() {

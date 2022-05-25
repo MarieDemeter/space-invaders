@@ -15,7 +15,7 @@ public class Destroyer {
         panel = new JPanel();
         panel.setBounds(185, 500,40,42);
 
-        ImageIcon vessel = new ImageIcon("image/vessel.png");
+        ImageIcon vessel = new ImageIcon("src/main/java/image/vessel.png");
         JLabel label = new JLabel();
         label.setIcon(vessel);
         panel.add(label);
@@ -41,7 +41,23 @@ public class Destroyer {
 
     public void destroyerFire() {
         int x = this.panel.getX();
-        this.game.fire(new FireBall(x));
+
+        if (this.game.getExtra() == 1){
+            this.game.fire(new FireBall(x));
+        } else if (this.game.getExtra() == 2) {
+            this.game.fire(new FireBall(x+5));
+            this.game.fire(new FireBall(x-5));
+        } else if (this.game.getExtra() == 3) {
+            this.game.fire(new FireBall(x));
+            this.game.fire(new FireBall(x-10));
+            this.game.fire(new FireBall(x+10));
+        }else if (this.game.getExtra() == 4) {
+            this.game.fire(new FireBall(x-5));
+            this.game.fire(new FireBall(x-10));
+            this.game.fire(new FireBall(x+5));
+            this.game.fire(new FireBall(x+10));
+        }
+
     }
 
     public JPanel getPanel() {
