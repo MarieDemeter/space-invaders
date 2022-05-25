@@ -41,7 +41,6 @@ public class TimerCreateBlock {
             for (Block block : this.game.getBlocks()) {
                 this.game.getPanel().add(block.getPanel());
             }
-            this.game.getPanel().repaint();
 
         }
     }

@@ -71,6 +71,7 @@ public class SpaceCampus {
 
     private void createBlocks() {
         new TimerCreateBlock(this);
+//        this.frame.repaint();
         new TimerBlockMove(this);
     }
 
@@ -96,17 +97,15 @@ public class SpaceCampus {
                 if (block.intersects(fireBall)) {
                     if (block.getNbToKill() > 1) {
                         block.setNbToKill(block.getNbToKill() - 1);
-                        block.getLabel().setText(Integer.toString(block.getNbToKill()));
-                        fireBall.getPanel().setVisible(false);
                         fireBallIndexToDelete = i;
                     } else {
                         block.getPanel().setVisible(false);
-                        fireBall.getPanel().setVisible(false);
                         blockIndexToDelete = j;
                         fireBallIndexToDelete = i;
                         this.point += 10;
                         this.updateScore();
                     }
+                    fireBall.getPanel().setVisible(false);
                 } else if (fireBall.getPanel().getBounds().getY() <= 35) {
                     fireBall.getPanel().setVisible(false);
                     fireBallIndexToDelete = i;

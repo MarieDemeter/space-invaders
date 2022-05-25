@@ -5,15 +5,17 @@ import java.awt.*;
 
 public class Block {
     private JPanel panel;
-    private JLabel label;
     private int STEP;
     private int nbToKill;
+    String url;
 
     public Block(int i, int nbOfBlock) {
+//        this.invaderBlue = new ImageIcon("image/invaderBlue.png");
+//        this.invaderPurple = new ImageIcon("image/invaderPurple.png");
+//        this.invaderRed = new ImageIcon("image/invaderRed.png");
+//        this.invaderBrown = new ImageIcon("image/invaderBrown.png");
         this.STEP = 40;
-        this.panel = new JPanel();
-        this.label = new JLabel();
-
+        this.url = "";
         this.createBlock(i, nbOfBlock);
     }
 
@@ -25,9 +27,6 @@ public class Block {
         this.nbToKill = nbToKill;
     }
 
-    public JLabel getLabel() {
-        return label;
-    }
 
     private void createBlock(int i, int nbOfBlock) {
         int width = 50;
@@ -35,32 +34,43 @@ public class Block {
         int widthGap = widthFrame - width * nbOfBlock;
         int gap = (int) widthGap / nbOfBlock;
 
-        ImageIcon invaderBlue = new ImageIcon("image/invaderBlue.png");
-        ImageIcon invaderPurple = new ImageIcon("image/invaderPurple.png");
-        ImageIcon invaderRed = new ImageIcon("image/invaderRed.png");
-        ImageIcon invaderBrown = new ImageIcon("image/invaderBrown.png");
-        JLabel labelInvader = new JLabel();
+//        JLabel labelInvader = new JLabel();
+//        labelInvader.setBounds(0,0,150,150);
 
         int randomColor = (int) (Math.random()*9) +1;
         switch (randomColor) {
             case 1:
-                labelInvader.setIcon(invaderPurple);
+//                labelInvader.setIcon(this.invaderPurple);
+                this.url = "image/invaderPurple.png";
                 this.nbToKill = 3;
                 break;
             case 2:
-                labelInvader.setIcon(invaderRed);
+//                labelInvader.setIcon(this.invaderRed);
+                this.url = "image/invaderRed.png";
                 this.nbToKill = 5;
                 break;
             case 3:
-                labelInvader.setIcon(invaderBrown);
+                this.url = "image/invaderBrown.png";
+//                labelInvader.setIcon(this.invaderBrown);
                 this.nbToKill = 7;
                 break;
             default:
-                labelInvader.setIcon(invaderBlue);
+//                labelInvader.setIcon(this.invaderBlue);
+                this.url = "image/invaderBlue.png";
                 this.nbToKill = 1;
                 break;
         }
-        this.panel.add(labelInvader);
+
+        this.panel = new JPanel(){
+            @Override
+            public void paintComponent(Graphics g){
+                super.paintComponent(g);
+                Graphics2D g2d = (Graphics2D) g.create();
+                ImageIcon imageIcon = new ImageIcon(url);
+                g2d.drawImage(imageIcon.getImage(), 0, 0, this);
+                g2d.dispose();
+            }
+        };
         this.panel.setBounds((gap / 2) * (i + 1) + width * i, 35, width, 37);
     }
 
